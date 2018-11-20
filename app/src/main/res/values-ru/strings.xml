@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Проверь свою удачу</string>
+    <string name="resultText">Очки: %1$d / Попыток: %2$d</string>
+    <string name="repeat">Еще раз!</string>
+</resources>

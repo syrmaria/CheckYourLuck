@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CheckYourLuck</string>
+    <string name="resultText">Score: %1$d / Attempts: %2$d</string>
+    <string name="repeat">Try again!</string>
+</resources>

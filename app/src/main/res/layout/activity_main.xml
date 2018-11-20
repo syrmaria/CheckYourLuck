@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.syrova_ma.checkyourluck.MainActivity">
+
+    <TextView
+        android:id="@+id/result_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:layout_gravity="center"
+        android:textSize="12sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageButton android:layout_height="100dp"
+            android:layout_width="0dp"
+            android:id="@+id/first"
+            android:layout_margin="6dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:onClick="checkTheBall"/>
+        <ImageButton android:layout_height="100dp"
+            android:layout_width="0dp"
+            android:id="@+id/second"
+            android:layout_margin="6dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:onClick="checkTheBall"/>
+        <ImageButton android:layout_height="100dp"
+            android:layout_width="0dp"
+            android:id="@+id/third"
+            android:layout_margin="6dp"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:onClick="checkTheBall"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/reset_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/repeat"
+        android:onClick="resetGame"/>
+
+</LinearLayout>
