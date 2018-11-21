@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="@dimen/margin"
     tools:context="com.syrovama.checkyourluck.MainActivity">
 
     <TextView
         android:id="@+id/result_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
         android:layout_gravity="center"
-        android:textSize="12sp"/>
+        android:textSize="@dimen/text_size"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,26 +20,29 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <ImageButton android:layout_height="100dp"
-            android:layout_width="0dp"
+        <ImageButton
             android:id="@+id/first"
-            android:layout_margin="6dp"
+            android:layout_height="wrap_content"
+            android:layout_width="@dimen/image_button_width"
             android:layout_weight="1"
-            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
             android:onClick="checkTheBall"/>
-        <ImageButton android:layout_height="100dp"
-            android:layout_width="0dp"
+        <ImageButton
             android:id="@+id/second"
-            android:layout_margin="6dp"
+            android:layout_height="wrap_content"
+            android:layout_width="@dimen/image_button_width"
             android:layout_weight="1"
-            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
             android:onClick="checkTheBall"/>
-        <ImageButton android:layout_height="100dp"
-            android:layout_width="0dp"
+        <ImageButton
             android:id="@+id/third"
-            android:layout_margin="6dp"
+            android:layout_height="wrap_content"
+            android:layout_width="@dimen/image_button_width"
             android:layout_weight="1"
-            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
             android:onClick="checkTheBall"/>
     </LinearLayout>
 
