@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="@dimen/margin"
+    android:background="@android:color/white"
     tools:context="com.syrovama.checkyourluck.MainActivity">
 
     <TextView
@@ -20,7 +20,7 @@
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/first"
             android:layout_height="wrap_content"
             android:layout_width="@dimen/image_button_width"
@@ -28,7 +28,7 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:onClick="checkTheBall"/>
-        <ImageButton
+        <ImageView
             android:id="@+id/second"
             android:layout_height="wrap_content"
             android:layout_width="@dimen/image_button_width"
@@ -36,7 +36,7 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:onClick="checkTheBall"/>
-        <ImageButton
+        <ImageView
             android:id="@+id/third"
             android:layout_height="wrap_content"
             android:layout_width="@dimen/image_button_width"

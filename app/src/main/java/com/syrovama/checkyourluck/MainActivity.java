@@ -1,11 +1,16 @@
 package com.syrovama.checkyourluck;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String SELECTED_POSITION ="SELECTED_POSITION";
     public static final String BALL_POSITION ="BALL_POSITION";
     public static final String FLAG = "FLAG";
-    private ArrayList<ImageButton> mImageButtonArrayList = new ArrayList<>();
+    private ArrayList<ImageView> mImageViewArrayList = new ArrayList<>();
     private Button mResetButton;
     private TextView mResultTextView;
     int ballPosition;
@@ -56,12 +61,12 @@ public class MainActivity extends AppCompatActivity {
     private void initViews() {
         mResetButton = findViewById(R.id.reset_button);
         mResultTextView = findViewById(R.id.result_text);
-        ImageButton imageButton = findViewById(R.id.first);
-        mImageButtonArrayList.add(imageButton);
-        imageButton = findViewById(R.id.second);
-        mImageButtonArrayList.add(imageButton);
-        imageButton = findViewById(R.id.third);
-        mImageButtonArrayList.add(imageButton);
+        ImageView imageView = findViewById(R.id.first);
+        mImageViewArrayList.add(imageView);
+        imageView = findViewById(R.id.second);
+        mImageViewArrayList.add(imageView);
+        imageView = findViewById(R.id.third);
+        mImageViewArrayList.add(imageView);
     }
 
     private void restoreSavedData(Bundle state) {
@@ -93,50 +98,53 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initImages() {
-        for (ImageButton imageButton: mImageButtonArrayList) {
-            imageButton.setImageResource(R.drawable.thimble);
-            imageButton.setEnabled(true);
+        for (ImageView imageView: mImageViewArrayList) {
+            imageView.setImageResource(R.drawable.thimble);
+            imageView.setTag(R.drawable.thimble);
+            imageView.setEnabled(true);
         }
     }
 
     private void showAllImages() {
-        for (ImageButton imageButton: mImageButtonArrayList) {
-            int position = mImageButtonArrayList.indexOf(imageButton);
+        for (ImageView imageView: mImageViewArrayList) {
+            int position = mImageViewArrayList.indexOf(imageView);
             if (position == selectedPosition) {
-                openSelectedImageButton(imageButton);
+                openSelectedImageView(imageView);
             } else {
+                int image;
                 if (isAllShown) {
                     if (ballPosition == position) {
-                        imageButton.setImageResource(R.drawable.success);
+                        image = R.drawable.success;
                     } else {
-                        imageButton.setImageResource(R.drawable.fail);
+                        image = R.drawable.fail;
                     }
                 } else {
-                    imageButton.setImageResource(R.drawable.thimble);
+                    image = R.drawable.thimble;
                 }
+                changeImage(imageView, image);
             }
-            imageButton.setEnabled(false);
+            imageView.setEnabled(false);
         }
     }
 
-    public void openSelectedImageButton(ImageButton imageButton) {
+    public void openSelectedImageView(ImageView imageView) {
         if (selectedPosition == ballPosition) {
-            imageButton.setImageResource(R.drawable.success);
+            changeImage(imageView, R.drawable.success);
         } else {
-            imageButton.setImageResource(R.drawable.fail);
+            changeImage(imageView, R.drawable.fail);
         }
     }
 
     public void checkTheBall(View view) {
-        ImageButton selectedImageButton = (ImageButton) view;
-        selectedPosition = mImageButtonArrayList.indexOf(selectedImageButton);
+        ImageView selectedImageView = (ImageView) view;
+        selectedPosition = mImageViewArrayList.indexOf(selectedImageView);
         if (selectedPosition == ballPosition) {
             score++;
         }
         attempts++;
-        openSelectedImageButton(selectedImageButton);
-        for (ImageButton imageButton: mImageButtonArrayList) {
-            imageButton.setEnabled(false);
+        openSelectedImageView(selectedImageView);
+        for (ImageView imageView: mImageViewArrayList) {
+            imageView.setEnabled(false);
         }
         showScore();
         mResetButton.setEnabled(true);
@@ -154,4 +162,25 @@ public class MainActivity extends AppCompatActivity {
         outState.putBoolean(FLAG, isAllShown);
     }
 
+    public void changeImage(ImageView view, int imageRes) {
+        Object tag = view.getTag();
+        if (tag == null) view.setImageResource(imageRes);
+        else if (imageRes != (int)tag) {
+            if ((int)tag == R.drawable.thimble) animateImageChange(view, imageRes);
+            else view.setImageResource(imageRes);
+        }
+        view.setTag(imageRes);
+    }
+
+    private void animateImageChange(final ImageView view, final int imageRes) {
+        Animation animSlide = AnimationUtils.loadAnimation(this, R.anim.slide_up);
+        animSlide.setAnimationListener(new Animation.AnimationListener() {
+            @Override public void onAnimationStart(Animation animation) {}
+            @Override public void onAnimationRepeat(Animation animation) {}
+            @Override public void onAnimationEnd(Animation animation) {
+                view.setImageResource(imageRes);
+            }
+        });
+        view.startAnimation(animSlide);
+    }
 }
